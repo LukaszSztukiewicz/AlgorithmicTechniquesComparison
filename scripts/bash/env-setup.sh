@@ -33,11 +33,12 @@ prun="alias prun=./build/bin/${projectname}_run"
 ptest="alias ptest=./build/bin/${projectname}_test"
 pbuild="alias pbuild=./scripts/bash/pbuild.sh"
 pmake="alias pmake=./scripts/bash/pmake.sh"
+mf="alias mf=./scripts/bash/mf.sh"
 
 #check what type of shell you are using and add the functions to the shell profile
 for i in in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile"; do
   if [ -f $i ]; then
-    for j in "$prun" "$ptest" "$pbuild" "$pmake"; do
+    for j in "$prun" "$ptest" "$pbuild" "$pmake" "$mf"; do
       if ! grep -q "$j" "$i"; then
         echo "$j" >> $i
       fi
