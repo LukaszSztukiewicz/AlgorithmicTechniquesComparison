@@ -1,4 +1,5 @@
 #include "csv.h"
+
 CSV::CSV(std::string filename, bool isCreateNewFile) : filename(filename) {
   if (isCreateNewFile) {
     std::fstream file(filename, std::fstream::trunc | std::fstream::out);

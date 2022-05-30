@@ -9,6 +9,10 @@ namespace="$(echo "${basename}" | tr '-' '_')"
 echo "#ifndef ${cppheader}_H
 #define ${cppheader}_H
 
+namespace ${namespace} {
+
+} // namespace ${namespace}
+
 #endif // ${cppheader}_H " > "./src/${FILE}.h"
 
 echo "#include \"${FILE}.h\"
