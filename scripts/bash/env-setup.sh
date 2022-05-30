@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if [ "YOUR_PROJECT_NAME_IN_QUOTATION_MARKS" = "$1" ]; then
-  projectname="defaultproject"
-elif [ -z "$1" ]; then
+if [ "YOUR_PROJECT_NAME_IN_QUOTATION_MARKS" = "$1" ] || [ -z "$1" ]; then
   projectname="defaultproject"
 else
   projectname="$1"
@@ -39,10 +37,11 @@ pmake="alias pmake=./scripts/bash/pmake.sh"
 for i in in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile"; do
   if [ -f $i ]; then
     for j in "$prun" "$ptest" "$pbuild" "$pmake"; do
-      if [ -z "$(grep -F "$j" $i)" ]; then
+      if ! grep -q "$j" "$i"; then
         echo "$j" >> $i
       fi
     done
+    . $i
   fi
 done
 
@@ -52,4 +51,4 @@ chmod +x ./scripts/bash/mf.sh
 #run build
 chmod +x ./scripts/bash/pbuild.sh
 chmod +x ./scripts/bash/pmake.sh
-
+./scripts/bash/pbuild.sh
