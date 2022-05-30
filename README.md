@@ -1,5 +1,5 @@
 # CuPyterLab
-Environment for performing experiments in C++ data analysis in Python with extensive support for Jupyter Notebooks.
+Environment for performing experiments in C++ and data analysis in Python with support for Jupyter Notebooks.
 
 [Google Style Guide](https://google.github.io/styleguide/cppguide.html)
 
@@ -17,9 +17,9 @@ Target:
     chmod +x ./scripts/bash/env-setup.sh 
     ./scripts/bash/env-setup.sh "YOUR_PROJECT_NAME_IN_QUOTATION_MARKS"
 ```
-If the there is an error "ptest command is not found" simply load your terminal source file:
+If the there is an error simply load your terminal source file:
 ```
-    . ~/.zshrc
+    . ~/.zshrc #or whichever shell you are using
 ```
 ### Usage
 Add a C++ source file: 
