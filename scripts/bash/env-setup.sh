@@ -26,8 +26,7 @@ add_subdirectory(lib/googletest)
 add_subdirectory(src)
 add_subdirectory(test)
 
-enable_testing()
-" > CMakeLists.txt
+enable_testing()" > CMakeLists.txt
 
 prun="alias prun=./build/bin/${projectname}_run" 
 ptest="alias ptest=./build/bin/${projectname}_test"
