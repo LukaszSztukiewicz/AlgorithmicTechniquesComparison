@@ -8,8 +8,6 @@ file(GLOB_RECURSE HEADERS LIST_DIRECTORIES false *.h)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(${OUTPUT_PROGRAM}_run  ${HEADERS} ${SOURCES})
-
 add_library(${OUTPUT_PROGRAM}_lib STATIC  ${HEADERS} ${SOURCES})
 
 enable_testing()

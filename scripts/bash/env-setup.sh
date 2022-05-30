@@ -9,8 +9,7 @@ else
 fi
 
 #add dependencies
-cd lib && git clone https://github.com/google/googletest.git
-cd ../
+cd lib && git clone https://github.com/google/googletest.git && cd ..
 
 echo "
 cmake_minimum_required(VERSION 3.10)
@@ -31,40 +30,26 @@ add_subdirectory(src)
 add_subdirectory(test)
 " > CMakeLists.txt
 
-prun="prun (){
-    ./bin/${projectname}_run
-}" 
-
-ptest="ptest (){
-    ./bin/${projectname}_test
-}"
+prun="alias prun=./build/bin/${projectname}_run" 
+ptest="alias ptest=./build/bin/${projectname}_test"
+pbuild="alias pbuild=./scripts/bash/pbuild.sh"
+pmake="alias pmake=./scripts/bash/pmake.sh"
 
 #check what type of shell you are using and add the functions to the shell profile
-if [ -f ~/.zshrc ]; then
-    if ! grep -q "prun" ~/.zshrc; then
-        echo ${prun} >> ~/.zshrc
-        echo ${ptest} >> ~/.zshrc
-        . ~/.zshrc
-    fi
-
-elif [ -f ~/.bashrc ]; then
-    if ! grep -q "prun" ~/.bashrc; then
-        echo ${prun} >> ~/.bashrc
-        echo ${ptest} >> ~/.bashrc
-        . ~/.bashrc
-    fi
-
-elif [ -f ~/.bash_profile ]; then
-    if ! grep -q "prun" ~/.bash_profile; then
-        echo ${prun} >> ~/.bash_profile
-        echo ${ptest} >> ~/.bash_profile
-        . ~/.bash_profile
-    fi
-fi
+for i in in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile"; do
+  if [ -f $i ]; then
+    for j in "$prun" "$ptest" "$pbuild" "$pmake"; do
+      if [ -z "$(grep -F "$j" $i)" ]; then
+        echo "$j" >> $i
+      fi
+    done
+  fi
+done
 
 chmod +x ./scripts/bash/mf.sh
 ./scripts/bash/mf.sh ${projectname}
 
 #run build
-cmake .
-make
+chmod +x ./scripts/bash/pbuild.sh
+chmod +x ./scripts/bash/pmake.sh
+
