@@ -19,17 +19,25 @@ Target:
     ptest
 ```
 ### Usage
+Add a C++ source file: 
+```
+    mf NAME_OF_YOUR_FILE
+```
+Compile your source code: 
+```
+    ptest
+```
 Run build: 
 ```
     pbuild
 ```
-Run compiled binary: 
-```
-    prun
-```
 Run all tests: 
 ```
     ptest
+```
+Run compiled binary: 
+```
+    prun
 ```
 ### Dependencies:
  - [x] google test
