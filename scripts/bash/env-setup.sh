@@ -9,8 +9,7 @@ fi
 #add dependencies
 cd lib && git clone https://github.com/google/googletest.git && cd ..
 
-echo "
-cmake_minimum_required(VERSION 3.10)
+echo "cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
 # Set the name of the project as THIS variable
@@ -26,6 +25,8 @@ add_subdirectory(lib/googletest)
 #our subdirectories (goes into subdirectory and searches for CMakeLists.txt there)
 add_subdirectory(src)
 add_subdirectory(test)
+
+enable_testing()
 " > CMakeLists.txt
 
 prun="alias prun=./build/bin/${projectname}_run" 
