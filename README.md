@@ -1,5 +1,5 @@
 # CuPyterLab
-Environment for performing experminents in C++ and data analisys in Python with extensive support for Jupyter Notebooks.
+Environment for performing experminents in C++  data analisys in Python with extensive support for Jupyter Notebooks.
 
 [Google Style Guide](https://google.github.io/styleguide/cppguide.html)
 
@@ -14,33 +14,31 @@ Target:
 ```
 
 ```
-    ./configure ; make ; make install
     chmod +x ./scripts/bash/env-setup.sh 
     ./scripts/bash/env-setup.sh "YOUR_PROJECT_NAME_IN_QUOTATION_MARKS"
     ptest
 ```
 ### Usage
-Build: 
+Run build: 
 ```
-    make
+    pbuild
 ```
-Run: 
+Run compiled binary: 
 ```
     prun
 ```
-Test: 
+Run all tests: 
 ```
     ptest
-```
-Debug:
-```
-    cmake . -DCMAKE_BUILD_TYPE=Debug
 ```
 ### Dependencies:
  - [x] google test
  - [x] cmake
  - [ ] btaf
  - [ ] graphviz, anim
+
+### Future
+ - [ ] Ninja
  - [ ] gdb
 
 File extensions:
