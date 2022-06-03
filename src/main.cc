@@ -13,7 +13,7 @@ void time_comparison_Greedy_DynamicProgramming_Exhaustive() {
   int maxNumberOfItems     = 30;
 
   std::fstream file_results_time;
-  file_results_time.open(outQualityFile, std::fstream::out);
+  file_results_time.open(outTimeFile1, std::fstream::out);
   file_results_time << "numberOfItems,greedy,dynamicProgramming,exhaustive" << std::endl;
 
   // vector of solving functions
@@ -22,13 +22,13 @@ void time_comparison_Greedy_DynamicProgramming_Exhaustive() {
       AlgorithmicTechniquesComparison::solveDynamicProgramming,
       AlgorithmicTechniquesComparison::solveExhaustive};
 
-  for (int i = initialNumberOfItems; i < maxNumberOfItems; i += stepNumberOfItems) {
+  for (int i = initialNumberOfItems; i <= maxNumberOfItems; i += stepNumberOfItems) {
     file_results_time << i << ",";
-    int knapsackCapacity = floor(i * 0.6);
-    int maxWeight        = floor(i * 0.4);
+    int knapsackCapacity = int(i * 0.6);
+    int maxWeight        = int(i * 0.4);
 
     // LOG
-    std::cout << "Generating instance with " << i << " number of elements" << std::endl;
+    std::cout << "Generating instance with " << i << " number of elements GDPE" << std::endl;
     std::vector<Item> items = AlgorithmicTechniquesComparison::generateRandomItems(i, maxWeight);
 
     for (auto solvingFunction : solvingFunctions) {
@@ -37,7 +37,7 @@ void time_comparison_Greedy_DynamicProgramming_Exhaustive() {
       auto solution = solvingFunction(items, knapsackCapacity); // key function
 
       auto end     = std::chrono::high_resolution_clock::now();
-      auto time_ch = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(); // milliseconds
+      auto time_ch = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count(); // time in microseconds
       file_results_time << time_ch << ",";
     }
     file_results_time << std::endl;
@@ -46,11 +46,11 @@ void time_comparison_Greedy_DynamicProgramming_Exhaustive() {
 
 void time_comparison_Greedy_DynamicProgramming() {
   int initialNumberOfItems = 1000;
-  int stepNumberOfItems    = 500;
+  int stepNumberOfItems    = 100;
   int maxNumberOfItems     = 10000;
 
   std::fstream file_results_time;
-  file_results_time.open(outQualityFile, std::fstream::out);
+  file_results_time.open(outTimeFile2, std::fstream::out);
   file_results_time << "numberOfItems,greedy,dynamicProgramming" << std::endl;
 
   // vector of solving functions
@@ -59,13 +59,13 @@ void time_comparison_Greedy_DynamicProgramming() {
       AlgorithmicTechniquesComparison::solveDynamicProgramming,
   };
 
-  for (int i = initialNumberOfItems; i < maxNumberOfItems; i += stepNumberOfItems) {
+  for (int i = initialNumberOfItems; i <= maxNumberOfItems; i += stepNumberOfItems) {
     file_results_time << i << ",";
-    int knapsackCapacity = floor(i * 0.6);
-    int maxWeight        = floor(i * 0.4);
+    int knapsackCapacity = int(i * 0.6);
+    int maxWeight        = int(i * 0.4);
 
     // LOG
-    std::cout << "Generating instance with " << i << " number of elements" << std::endl;
+    std::cout << "Generating instance with " << i << " number of elements GDP" << std::endl;
     std::vector<Item> items = AlgorithmicTechniquesComparison::generateRandomItems(i, maxWeight);
 
     for (auto solvingFunction : solvingFunctions) {
@@ -74,7 +74,7 @@ void time_comparison_Greedy_DynamicProgramming() {
       auto solution = solvingFunction(items, knapsackCapacity); // key function
 
       auto end     = std::chrono::high_resolution_clock::now();
-      auto time_ch = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(); // milliseconds
+      auto time_ch = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count(); // microseconds
       file_results_time << time_ch << ",";
     }
     file_results_time << std::endl;
@@ -83,7 +83,7 @@ void time_comparison_Greedy_DynamicProgramming() {
 
 void quality_comparison_Greedy_DynamicProgramming() {
   int initialNumberOfItems = 1000;
-  int stepNumberOfItems    = 500;
+  int stepNumberOfItems    = 100;
   int maxNumberOfItems     = 10000;
 
   std::fstream file_results_quality;
@@ -96,13 +96,13 @@ void quality_comparison_Greedy_DynamicProgramming() {
       AlgorithmicTechniquesComparison::solveDynamicProgramming,
   };
 
-  for (int i = initialNumberOfItems; i < maxNumberOfItems; i += stepNumberOfItems) {
+  for (int i = initialNumberOfItems; i <= maxNumberOfItems; i += stepNumberOfItems) {
     file_results_quality << i << ",";
-    int knapsackCapacity = floor(i * 0.6);
-    int maxWeight        = floor(i * 0.4);
+    int knapsackCapacity = int(i * 0.6);
+    int maxWeight        = int(i * 0.4);
 
     // LOG
-    std::cout << "Generating instance with " << i << " number of elements" << std::endl;
+    std::cout << "Generating instance with " << i << " number of elements QGDP" << std::endl;
     std::vector<Item> items = AlgorithmicTechniquesComparison::generateRandomItems(i, maxWeight);
 
     for (auto solvingFunction : solvingFunctions) {
@@ -123,7 +123,7 @@ int main(int argc, char const *argv[]) {
 
   time_comparison_Greedy_DynamicProgramming_Exhaustive();
   time_comparison_Greedy_DynamicProgramming();
-  quality_comparison_Greedy_DynamicProgramming();
+  // quality_comparison_Greedy_DynamicProgramming();
 
   return 0;
 }

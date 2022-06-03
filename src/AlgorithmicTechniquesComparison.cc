@@ -6,8 +6,8 @@ std::vector<Item> generateRandomItems(int numberOfItems, int maxVW) {
   std::vector<Item> items;
   for (int i = 0; i < numberOfItems; i++) {
     Item item;
-    item.weight = rand() % maxVW;
-    item.value  = rand() % maxVW;
+    item.weight = rand() % maxVW + 1;
+    item.value  = rand() % maxVW + 1;
     items.push_back(item);
   }
   return items;
@@ -52,7 +52,7 @@ std::vector<Item> solveExhaustive(std::vector<Item> items, int knapsackCapacity)
 
 std::vector<Item> solveGreedy(std::vector<Item> items, int knapsackCapacity) {
   struct ItemWithScore : public Item {
-    int score;
+    double score;
   };
   std::vector<ItemWithScore> itemsWithScore;
   for (int i = 0; i < items.size(); i++) {
