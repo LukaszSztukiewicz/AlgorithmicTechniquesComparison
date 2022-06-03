@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
 # Set the name of the project as THIS variable
-set(THIS defaultproject)
+set(THIS AlgorithmicTechniquesComparison)
 project(${THIS})
 
 #source headers
@@ -16,4 +16,3 @@ add_subdirectory(src)
 add_subdirectory(test)
 
 enable_testing()
-
