@@ -3,8 +3,10 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <iostream>
 #include <string>
 #include <vector>
+
 struct Item {
   int weight;
   int value;

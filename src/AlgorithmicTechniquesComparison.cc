@@ -47,6 +47,13 @@ std::vector<Item> solveExhaustive(std::vector<Item> items, int knapsackCapacity)
     }
     mask[k] = true;
   }
+  // LOG
+  std::cout << "Exhaustive: " << bestSolutionValue << std::endl;
+  // print solution
+  for (int i = 0; i < bestSolution.size(); i++) {
+    std::cout << bestSolution[i].value << "/" << bestSolution[i].weight << " ";
+  }
+  printf("\n");
   return bestSolution;
 }
 
@@ -72,30 +79,46 @@ std::vector<Item> solveGreedy(std::vector<Item> items, int knapsackCapacity) {
       knapsackCapacity -= itemsWithScore[i].weight;
     }
   }
+  // LOG
+  printf("Greedy: %d\n", chosenItemsValue);
+  // print chosen items
+  for (int i = 0; i < chosenItems.size(); i++) {
+    std::cout << chosenItems[i].value << "/" << chosenItems[i].weight << " ";
+  }
+  printf("\n");
   return chosenItems;
 }
 
 std::vector<Item> solveDynamicProgramming(std::vector<Item> items, int knapsackCapacity) { // check
   std::vector<Item> chosenItems;
-  std::vector<int> chosenItemsValue = std::vector<int>(knapsackCapacity + 1, 0);
+  std::vector<std::vector<int>> dp = std::vector<std::vector<int>>(items.size() + 1, std::vector<int>(knapsackCapacity + 1, 0));
   for (int i = 0; i < items.size(); i++) {
-    for (int j = knapsackCapacity; j >= items[i].weight; j--) {
-      if (chosenItemsValue[j - items[i].weight] + items[i].value > chosenItemsValue[j]) {
-        chosenItemsValue[j] = chosenItemsValue[j - items[i].weight] + items[i].value;
+    for (int j = 0; j <= knapsackCapacity; j++) {
+      if (j < items[i].weight) {
+        dp[i + 1][j] = dp[i][j];
+      } else {
+        dp[i + 1][j] = std::max(dp[i][j], dp[i][j - items[i].weight] + items[i].value);
       }
     }
   }
-  for (int i = knapsackCapacity; i >= 0; i--) {
-    if (chosenItemsValue[i] > 0) {
-      for (int j = 0; j < items.size(); j++) {
-        if (chosenItemsValue[i] == chosenItemsValue[i - items[j].weight] + items[j].value) {
-          chosenItems.push_back(items[j]);
-          i -= items[j].weight;
-          break;
-        }
-      }
+
+  int i = items.size();
+  int j = knapsackCapacity;
+  while (i > 0) {
+    if (dp[i][j] != dp[i - 1][j]) {
+      chosenItems.push_back(items[i - 1]);
+      j -= items[i - 1].weight;
     }
+    i--;
   }
+
+  // LOG
+  printf("DynamicProgramming: %d\n", dp[items.size()][knapsackCapacity]);
+  // print chosen items
+  for (int i = 0; i < chosenItems.size(); i++) {
+    std::cout << chosenItems[i].value << "/" << chosenItems[i].weight << " ";
+  }
+  printf("\n");
   return chosenItems;
 }
 } // namespace AlgorithmicTechniquesComparison
